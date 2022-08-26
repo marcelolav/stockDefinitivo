@@ -2,16 +2,16 @@
     <div class="row align-items-start">
         <div class="col">
             <div class="mb-3">
-              <input *ngIf="rubrosModelo.id" type="text" readonly value="{{rubrosModelo.id}}" [(ngModel)]="rubrosModelo.id">
+              <input hidden *ngIf="rubrosModelo.id" type="text" readonly value="{{rubrosModelo.id}}" [(ngModel)]="rubrosModelo.id">
                 <label for="nombreRubro" class="form-label">Nombre del rubro</label>
-                <input type="text" class="form-control" id="nombreRubro" [(ngModel)]="rubrosModelo.nombre">
+                <input type="text" class="form-control" id="nombreRubro" [(ngModel)]="rubrosModelo.nombre" required>
             </div>
             <button *ngIf="!modificar" class="btn btn-primary" (click)="agregarRubro(rubrosModelo)">Agregar</button>
             <button *ngIf="modificar" class="btn btn-secondary" (click)="modificarRubro(rubrosModelo)">Modificar</button>
-            <button class="btn btn-danger" >Cancelar</button>
+            <button class="btn btn-danger" (click)="cancelar()" >Cancelar</button>
         </div>
         <div class="col">
-            <h3>Rubros</h3>
+            <h5 class="shadow-lg p-3 mb-5 bg-body rounded">Rubros</h5>
             <table class="table table-success table-striped">
                 <thead>
                   <tr>

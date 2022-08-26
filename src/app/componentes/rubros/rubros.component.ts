@@ -11,8 +11,8 @@ export class RubrosComponent implements OnInit {
   rubros: Rubros[] = [];
   modificar: boolean = false;
   rubrosModelo: Rubros = {
-    nombre: ''
-  }
+    nombre: '',
+  };
 
   constructor(private rubrosService: RubrosService) {}
 
@@ -33,29 +33,34 @@ export class RubrosComponent implements OnInit {
     this.modificar = true;
     this.rubrosModelo = {
       id: rubro.id,
-      nombre: rubro.nombre
-    }
-
+      nombre: rubro.nombre,
+    };
   }
 
   modificarRubro(rubro: Rubros) {
-    if(confirm('¿Está seguro de modificar el rubro?')){
+    if (confirm('¿Está seguro de modificar el rubro?')) {
       const id = rubro.id;
       const nombre = rubro.nombre;
       this.rubrosService.editarRubro(rubro);
     }
     this.modificar = false;
     this.rubrosModelo = {
-      nombre: ''
-    }
+      nombre: '',
+    };
   }
 
   agregarRubro(dato: Rubros) {
-    if (dato !== null) {
-      this.rubrosService.agregarRubro(dato);
-    }
+    this.rubrosService.agregarRubro(dato);
+
     this.rubrosModelo = {
-      nombre: ''
-    }
+      nombre: '',
+    };
+  }
+
+  cancelar() {
+    this.rubrosModelo = {
+      nombre: '',
+    };
+    this.modificar = false;
   }
 }
