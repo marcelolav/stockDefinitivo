@@ -1,1 +1,86 @@
-<p>productos works!</p>
+<div class="row">
+  <div class="col text-center">
+    <div class="shadow-lg p-3 mb-5 bg-body rounded">Alta / Modificacion</div>
+    <form [formGroup]="frmProductos">
+      <div class="mb-3 row">
+        <label for="codigo_barra" class="col-sm-2 col-form-label">Código</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="codigo_barra"
+            name="codigo_barra"
+            formControlName="codigo_barra"
+          />
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="nombre"
+            name="nombre"
+            formControlName="nombre"
+          />
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="precio_cp" class="col-sm-3 col-form-label">Compra $</label>
+        <div class="col-sm-3">
+          <input
+            type="number"
+            class="form-control"
+            id="precio_cp"
+            name="precio_cp"
+            formControlName="precio_cp"
+          />
+        </div>
+        <label for="precio_cd" class="col-sm-3 col-form-label"
+          >Compra U$D</label
+        >
+        <div class="col-sm-3">
+            <input type="number" class="form-control" id="precio_cd" name="precio_cd" formControlName="precio_cd">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col text-center">
+    <div class="shadow-lg p-3 mb-5 bg-body rounded">Listado</div>
+    <table class="table table-success table-striped">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Pr. Compra</th>
+          <th>Pr. Venta</th>
+          <th>Rubro</th>
+          <th>Existencia</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of listaProductos">
+          <td>{{ producto.codigo_barra }}</td>
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.precio_cp }}</td>
+          <td>{{ producto.precio_vp }}</td>
+          <td>{{ producto.rubro }}</td>
+          <td>{{ producto.stock }}</td>
+          <td>
+            <button
+              class="btn btn-primary"
+              (click)="eliminarProducto(producto)"
+            >
+              Eliminar
+            </button>
+            <button class="btn btn-primary" (click)="editarProducto(producto)">
+              Editar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

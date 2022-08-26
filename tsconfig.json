@@ -3,6 +3,12 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@com/*": ["src/app/componentes/*"],
+      "@srv/*": ["src/app/servicios/*"],
+      "@mdl/*": ["src/app/modelos/*"]
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
