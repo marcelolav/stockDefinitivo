@@ -1,0 +1,35 @@
+<div class="container text-center mt-4">
+    <div class="row align-items-start">
+        <div class="col">
+            <div class="mb-3">
+              <input *ngIf="rubrosModelo.id" type="text" readonly value="{{rubrosModelo.id}}" [(ngModel)]="rubrosModelo.id">
+                <label for="nombreRubro" class="form-label">Nombre del rubro</label>
+                <input type="text" class="form-control" id="nombreRubro" [(ngModel)]="rubrosModelo.nombre">
+            </div>
+            <button *ngIf="!modificar" class="btn btn-primary" (click)="agregarRubro(rubrosModelo)">Agregar</button>
+            <button *ngIf="modificar" class="btn btn-secondary" (click)="modificarRubro(rubrosModelo)">Modificar</button>
+            <button class="btn btn-danger" >Cancelar</button>
+        </div>
+        <div class="col">
+            <h3>Rubros</h3>
+            <table class="table table-success table-striped">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let rubro of rubros">
+                    <td hidden>{{rubro.id}}</td>
+                    <td>{{rubro.nombre}}</td>
+                    <td>
+                        <button class="btn btn-primary" (click)="eliminarRubro(rubro)">Eliminar</button>
+                        <button class="btn btn-primary" (click)="editarRubro(rubro)">Editar</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
