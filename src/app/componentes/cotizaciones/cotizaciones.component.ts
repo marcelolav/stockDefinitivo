@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CotizacionesService } from '../../servicios/cotizaciones.service';
+import { CotizacionesService } from '@srv/cotizaciones.service';
 
 @Component({
   selector: 'app-cotizaciones',

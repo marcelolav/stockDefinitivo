@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Rubros } from 'src/app/modelos/rubros';
-import { RubrosService } from 'src/app/servicios/rubros.service';
+import { Rubros } from '@mdl/rubros';
+import { RubrosService } from '@srv/rubros.service';
 
 @Component({
   selector: 'app-rubros',

@@ -8,12 +8,12 @@ import { HttpClientModule} from '@angular/common/http'
 // Firebase
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { environment } from '../environments/environment';
+import { environment } from '@env/environment';
 // Forms reactivos
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProductosComponent } from './componentes/productos/productos.component';
-import { RubrosComponent } from './componentes/rubros/rubros.component';
-import { CotizacionesComponent } from './componentes/cotizaciones/cotizaciones.component';
+import { ProductosComponent } from '@com/productos/productos.component';
+import { RubrosComponent } from '@com/rubros/rubros.component';
+import { CotizacionesComponent } from '@com/cotizaciones/cotizaciones.component';
 
 @NgModule({
   declarations: [

@@ -7,7 +7,8 @@
       "@app/*": ["src/app/*"],
       "@com/*": ["src/app/componentes/*"],
       "@srv/*": ["src/app/servicios/*"],
-      "@mdl/*": ["src/app/modelos/*"]
+      "@mdl/*": ["src/app/modelos/*"],
+      "@env/*": ["src/environments/*"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
