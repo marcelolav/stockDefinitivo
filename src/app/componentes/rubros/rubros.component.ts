@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Rubros } from 'src/app/modelos/rubros';
 import { RubrosService } from 'src/app/servicios/rubros.service';
 
@@ -8,13 +9,16 @@ import { RubrosService } from 'src/app/servicios/rubros.service';
   styleUrls: ['./rubros.component.css'],
 })
 export class RubrosComponent implements OnInit {
+  frmRubros: FormGroup;
   rubros: Rubros[] = [];
   modificar: boolean = false;
-  rubrosModelo: Rubros = {
-    nombre: '',
-  };
 
-  constructor(private rubrosService: RubrosService) {}
+  constructor(private rubrosService: RubrosService) {
+    this.frmRubros = new FormGroup({
+      id: new FormControl(''),
+      nombre: new FormControl('', [Validators.required]),
+    });
+  }
 
   ngOnInit(): void {
     this.rubrosService.listarRubros().subscribe((listaRubros) => {
@@ -31,10 +35,7 @@ export class RubrosComponent implements OnInit {
 
   editarRubro(rubro: Rubros) {
     this.modificar = true;
-    this.rubrosModelo = {
-      id: rubro.id,
-      nombre: rubro.nombre,
-    };
+    this.frmRubros.patchValue(rubro);
   }
 
   modificarRubro(rubro: Rubros) {
@@ -44,23 +45,16 @@ export class RubrosComponent implements OnInit {
       this.rubrosService.editarRubro(rubro);
     }
     this.modificar = false;
-    this.rubrosModelo = {
-      nombre: '',
-    };
+    this.frmRubros.reset();
   }
 
   agregarRubro(dato: Rubros) {
     this.rubrosService.agregarRubro(dato);
-
-    this.rubrosModelo = {
-      nombre: '',
-    };
+    this.frmRubros.reset();
   }
 
   cancelar() {
-    this.rubrosModelo = {
-      nombre: '',
-    };
+    this.frmRubros.reset();
     this.modificar = false;
   }
 }

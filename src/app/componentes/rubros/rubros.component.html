@@ -2,13 +2,15 @@
     <div class="row align-items-start">
         <div class="col">
             <div class="mb-3">
-              <input hidden *ngIf="rubrosModelo.id" type="text" readonly value="{{rubrosModelo.id}}" [(ngModel)]="rubrosModelo.id">
+              <form [formGroup]="frmRubros">
+                <input hidden formControlName="id">
                 <label for="nombreRubro" class="form-label">Nombre del rubro</label>
-                <input type="text" class="form-control" id="nombreRubro" [(ngModel)]="rubrosModelo.nombre" required>
+                <input type="text" class="form-control mb-3" id="nombreRubro" formControlName="nombre" required>
+                <button *ngIf="!modificar" class="btn btn-primary" (click)="agregarRubro(frmRubros.value)">Agregar</button>
+                <button *ngIf="modificar" class="btn btn-secondary" (click)="modificarRubro(frmRubros.value)">Modificar</button>
+                <button class="btn btn-danger" (click)="cancelar()" >Cancelar</button>
+              </form>
             </div>
-            <button *ngIf="!modificar" class="btn btn-primary" (click)="agregarRubro(rubrosModelo)">Agregar</button>
-            <button *ngIf="modificar" class="btn btn-secondary" (click)="modificarRubro(rubrosModelo)">Modificar</button>
-            <button class="btn btn-danger" (click)="cancelar()" >Cancelar</button>
         </div>
         <div class="col">
             <h5 class="shadow-lg p-3 mb-5 bg-body rounded">Rubros</h5>
@@ -24,8 +26,8 @@
                     <td hidden>{{rubro.id}}</td>
                     <td>{{rubro.nombre}}</td>
                     <td>
-                        <button class="btn btn-primary" (click)="eliminarRubro(rubro)">Eliminar</button>
-                        <button class="btn btn-primary" (click)="editarRubro(rubro)">Editar</button>
+                        <button class="btn btn-primary ml-1" (click)="eliminarRubro(rubro)"><i class="bi-trash"></i></button>
+                        <button class="btn btn-primary" (click)="editarRubro(rubro)"><i class="bi-pencil"></i></button>
                     </td>
                   </tr>
                 </tbody>
