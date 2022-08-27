@@ -25,6 +25,7 @@ export class ProductosService {
   }
   // Edita los datos de un producto particular en base a id pasado como parametro
   editarProducto(id:string, datos: any){
+    console.log('ID:', id, 'datos:', datos )
     const docRef = doc(this.fs,"productos",id);
     updateDoc(docRef, datos);
   }

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ProductosService } from '@srv/productos.service';
 import { Productos } from '@mdl/productos';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { RubrosService } from '@app/servicios/rubros.service';
+import { Rubros } from '@app/modelos/rubros';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-productos',
@@ -10,11 +13,16 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ProductosComponent implements OnInit {
   frmProductos: FormGroup;
-
+  modificacion: boolean = false;
   listaProductos: Productos[] = [];
+  listaRubros: Rubros[] = [];
 
-  constructor(private prdServ: ProductosService) {
+  constructor(
+    private prdServ: ProductosService,
+    private rubServ: RubrosService
+  ) {
     this.frmProductos = new FormGroup({
+      id: new FormControl(''),
       codigo_barra: new FormControl(''),
       nombre: new FormControl('', [Validators.required]),
       precio_cd: new FormControl(0),
@@ -25,6 +33,9 @@ export class ProductosComponent implements OnInit {
       stock: new FormControl(0),
       minimo: new FormControl(0),
     });
+    this.rubServ.listarRubros().subscribe((datos) => {
+      this.listaRubros = datos;
+    });
   }
 
   ngOnInit(): void {
@@ -34,13 +45,27 @@ export class ProductosComponent implements OnInit {
   }
 
   agregarProducto(dato: Productos) {
-    console.log(dato);
+    this.prdServ.agregaProducto(dato);
+    this.frmProductos.reset();
   }
   eliminarProducto(dato: Productos) {
-    console.log(dato);
+    if (confirm('¿Está seguro de eliminar el producto?')) {
+      this.prdServ.borrarProducto(dato);
+    }
+  }
+  // El editar se llama desde la lista de productos y solamente pone los datos en los campos
+  editarProducto(dato: Productos) {
+    this.frmProductos.patchValue(dato);
+    this.modificacion = true;
+  }
+  // el modificar sirve para modificar definitivamente el producto que esta viendose en el abm
+  modificarProducto(dato: Productos) {
+    this.prdServ.editarProducto(dato.id!, dato);
+    this.frmProductos.reset();
+    this.modificacion = false;
   }
 
-  editarProducto(dato: Productos) {
-    console.log(dato);
+  cancelarForm(){
+    this.frmProductos.reset();
   }
 }
