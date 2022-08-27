@@ -14,13 +14,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductosComponent } from '@com/productos/productos.component';
 import { RubrosComponent } from '@com/rubros/rubros.component';
 import { CotizacionesComponent } from '@com/cotizaciones/cotizaciones.component';
+import { IngresosComponent } from './componentes/ingresos/ingresos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductosComponent,
     RubrosComponent,
-    CotizacionesComponent
+    CotizacionesComponent,
+    IngresosComponent
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),

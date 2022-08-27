@@ -4,7 +4,6 @@ import { Productos } from '@mdl/productos';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RubrosService } from '@app/servicios/rubros.service';
 import { Rubros } from '@app/modelos/rubros';
-import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-productos',
