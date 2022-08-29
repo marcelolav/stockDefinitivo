@@ -4,8 +4,19 @@
   </div>
   <form [formGroup]="frmIngresos">
     <div class="row">
+      <div class="col-sm-3">
+        <div class="input-group date">
+          <input type="text" class="form-control" value="12-02-2012">
+          <div class="input-group-addon">
+              <span class="glyphicon glyphicon-th"></span>
+          </div>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+
         <div class="col-sm-3">
-            <input type="text" class="form-control" placeholder="escanee el código del producto..." >
+            <input type="text" class="form-control" formControlName="idProducto" placeholder="escanee el código del producto..." >
         </div>
     </div>
   </form>
