@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,8 @@ import { ProductosComponent } from '@com/productos/productos.component';
 import { RubrosComponent } from '@com/rubros/rubros.component';
 import { CotizacionesComponent } from '@com/cotizaciones/cotizaciones.component';
 import { IngresosComponent } from './componentes/ingresos/ingresos.component';
+import { ListaItemsComponent } from './componentes/ingresos/lista-items.component';
+import { KeysPipe } from './pipes/keys.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { IngresosComponent } from './componentes/ingresos/ingresos.component';
     ProductosComponent,
     RubrosComponent,
     CotizacionesComponent,
-    IngresosComponent
+    IngresosComponent,
+    ListaItemsComponent,
+    KeysPipe
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -32,7 +37,8 @@ import { IngresosComponent } from './componentes/ingresos/ingresos.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule, 
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

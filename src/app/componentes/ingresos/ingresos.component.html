@@ -1,23 +1,63 @@
-<div class="row text-center">
-  <div class="shadow-lg p-3 mb-3 bg-body rounded">
-    Ingreso de Mercadería a Depósito
-  </div>
-  <form [formGroup]="frmIngresos">
-    <div class="row">
-      <div class="col-sm-3">
-        <div class="input-group date">
-          <input type="text" class="form-control" value="12-02-2012">
-          <div class="input-group-addon">
-              <span class="glyphicon glyphicon-th"></span>
-          </div>
-      </div>
-      </div>
+<div class="container">
+  <div class="row text-center">
+    <div class="shadow-lg mp-3 mt-3 mb-3 bg-body rounded">
+      Ingreso de Mercadería a Depósito
     </div>
-    <div class="row">
-
+    <form [formGroup]="frmIngresos">
+      <div class="row">
         <div class="col-sm-3">
-            <input type="text" class="form-control" formControlName="idProducto" placeholder="escanee el código del producto..." >
+          <div class="input-group">
+            <label for="fecha" class="form-control">Fecha</label>
+            <input type="date" class="form-control" id="fecha" formControlName="fecha"  />
+            <div class="input-group-addon">
+              <span class="glyphicon glyphicon-th"></span>
+            </div>
+          </div>
         </div>
-    </div>
-  </form>
+        <div class="col-sm-3">
+          <label for="numeroFactura" class="form-control">Referencia Factura</label>
+          <input type="text" id="numeroFactura" class="form-control" formControlName="refFactura" />
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-sm-1">
+          <label for="idProducto" class="form-label">Código</label>
+          <input
+            type="text"
+            id="idProducto"
+            class="form-control"
+            formControlName="codigoProducto"
+            placeholder="escanee el código del producto..."
+          />
+        </div>
+        <div class="col-sm-5">
+          <label for="nombreProducto" class="form-label">Descripción</label>
+          <input type="text" class="form-control" id="nombreProducto" formControlName="nombreProducto" />
+        </div>
+        <div class="col-sm-1">
+          <label for="cantidadProducto" class="form-label">Cantidad</label>
+          <input type="number" class="form-control" id="cantidadProducto" formControlName="cantidad"/>
+        </div>
+        <div class="col-sm-1">
+          <label for="precioProducto" class="form-label">Precio</label>
+          <input type="number" class="form-control" id="precioProducto" formControlName="precioUnitario" />
+        </div>
+        <div class="col-sm-2">
+          <label for="subtotalProducto" class="form-label">Subtotal</label>
+          <input type="number" class="form-control" id="subtotalProducto" formControlName="importeTotal" />
+        </div>
+        <div class="col-sm-1">
+          <label for="botonAgregar"> Acciones </label>
+          <button id="botonAgregar" (click)="agregarItem(frmIngresos.value)" class="btn btn-primary">
+            Agregar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="container"> 
+  <div class="row mt-5">
+    <app-lista-items [recibido] = "frmEnvio"></app-lista-items>
+  </div>
 </div>

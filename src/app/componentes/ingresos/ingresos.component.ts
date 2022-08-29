@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Productos } from '@app/modelos/productos';
 import { ProductosService } from '@srv/productos.service';
-import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-ingresos',
@@ -13,13 +12,15 @@ export class IngresosComponent implements OnInit {
 
   frmIngresos: FormGroup;
   listaProductos: Productos[] = [];
+  frmEnvio: any;
 
   constructor(private prdServ: ProductosService) { 
     this.frmIngresos = new FormGroup({
       id: new FormControl(''),
       refFactura: new FormControl('', [Validators.required]),
-      fecha: new FormControl(Date),
+      fecha: new FormControl(''),
       idProducto: new FormControl(''),
+      codigoProducto: new FormControl(''),
       nombreProducto: new FormControl(''),
       precioUnitario: new FormControl(0),
       cantidad: new FormControl(0),
@@ -31,6 +32,11 @@ export class IngresosComponent implements OnInit {
     this.prdServ.obtenerProductos().subscribe((datos) => {
       this.listaProductos = datos;
     });
+  }
+
+  agregarItem(dato:any) {
+    this.frmEnvio = dato;
+    console.log(dato);
   }
 
 }
