@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, updateDoc, query, where, getDocs } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Productos } from '@mdl/productos';
 @Injectable({
   providedIn: 'root'
 })
 export class ProductosService {
+
+  docBusqueda: any = [];
 
   constructor(private fs:Firestore) { }
   // Agrega un producto con todo el registro
@@ -28,5 +30,17 @@ export class ProductosService {
     console.log('ID:', id, 'datos:', datos )
     const docRef = doc(this.fs,"productos",id);
     updateDoc(docRef, datos);
+  }
+
+  async obtenerProducto(nombre: string) {
+    const prdRef = collection(this.fs, "productos");
+    const q = query(prdRef, where("nombre", "==", nombre));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      this.docBusqueda = doc.data(); 
+    }
+    
+    );
+    return this.docBusqueda;
   }
 }

@@ -28,10 +28,9 @@ export class IngresosComponent implements OnInit {
       refFactura: new FormControl('', [Validators.required]),
       fecha: new FormControl('', [Validators.required]),
       idProducto: new FormControl(''),
-      codigo_barra: new FormControl('', [Validators.required]),
       nombreProducto: new FormControl(''),
       precioUnitario: new FormControl(0, [Validators.required]),
-      cantidad: new FormControl(0, [Validators.required]),
+      cantidad: new FormControl(0, [Validators.required, Validators.min(1)]),
       importeTotal: new FormControl(0),
     });
     this.frmIngresos.get('precioUnitario')?.valueChanges.subscribe((dato) => {
@@ -45,9 +44,13 @@ export class IngresosComponent implements OnInit {
       this.precioSubtotal = dato * this.precioUnitario;
       this.frmIngresos.patchValue({importeTotal: this.precioSubtotal})
     });
-    this.frmIngresos.get('codigo_barra')?.valueChanges.subscribe(dato => {
+    this.frmIngresos.get('nombreProducto')?.valueChanges.subscribe(async dato => {
       // aca iria el filtro para que ponga el codigo_barra correspondiente de cada producto
-      const codigo_buscar = this.frmIngresos.get('codigo_barra')?.value
+      const prodBuscado = await this.prdServ.obtenerProducto(this.frmIngresos.get('nombreProducto')?.value)
+      this.precioUnitario = prodBuscado.precio_vp;
+      console.log(this.precioUnitario);
+      this.frmIngresos.patchValue({precioUnitario: this.precioUnitario});
+      
     });
   }
 

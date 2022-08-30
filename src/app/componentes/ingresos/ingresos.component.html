@@ -22,24 +22,13 @@
         </div>
       </div>
       <div class="row mt-4">
-        <div class="col-sm-1">
-          <label for="idProducto" class="form-label">Código</label>
-          <input
-            type="text"
-            id="idProducto"
-            class="form-control"
-            formControlName="codigo_barra"
-            placeholder="escanee el código del producto..."
-            list="datosProducto"
-            (change)="onChangeEvent($event)"
-          />
-          <datalist id="datosProducto">
-            <option *ngFor="let lista of listaProductos" value="{{lista.codigo_barra}}">
-          </datalist>
-        </div>
         <div class="col-sm-5">
           <label for="nombreProducto" class="form-label">Descripción</label>
-          <input type="text" class="form-control" id="nombreProducto" formControlName="nombreProducto"/>
+          <select name="nombreProducto" id="nombreProducto" formControlName="nombreProducto" class="form-control">
+            <option *ngFor="let prod of listaProductos" value="{{prod.nombre}}" class="form-control">{{prod.nombre}} </option>
+            
+          </select>
+          
         </div>
         <div class="col-sm-1">
           <label for="cantidadProducto" class="form-label">Cantidad</label>
@@ -47,7 +36,7 @@
         </div>
         <div class="col-sm-1">
           <label for="precioProducto" class="form-label">Precio</label>
-          <input type="number" class="form-control" id="precioProducto" formControlName="precioUnitario"/>
+          <input type="number" class="form-control" id="precioProducto" formControlName="precioUnitario" readonly/>
         </div>
         <div class="col-sm-2">
           <label for="subtotalProducto" class="form-label">Subtotal</label>
@@ -55,7 +44,7 @@
         </div>
         <div class="col-sm-1">
           <label for="botonAgregar"> Acciones </label>
-          <button id="botonAgregar" (click)="agregarItem(frmIngresos.value)" [disabled]="!frmIngresos.valid" class="btn btn-primary">
+          <button id="botonAgregar" (click)="agregarItem(frmIngresos.value)" [disabled]="!frmIngresos.valid" class="btn btn-primary mt-1">
             Agregar
           </button>
         </div>
@@ -78,13 +67,19 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of tablaItems">
-        <td>{{ item.codigo_barra }}</td>
+        <td>{{ item.refFactura }}</td>
         <td>{{ item.nombreProducto }}</td>
         <td>{{ item.cantidad }}</td>
         <td>{{ item.precioUnitario | currency: 'CAD':'symbol-narrow':'1.2-2'}}</td>
         <td>{{ item.importeTotal | currency: 'CAD':'symbol-narrow':'1.2-2' }}</td>
       </tr>
     </tbody>
+  
   </table>
+  <div class="row">
+    <button class="btn btn-primary">Calcular</button>
+    <button class="btn btn-primary">Finalizar Ingreso</button>
+
+  </div>
   </div>
 </div>
