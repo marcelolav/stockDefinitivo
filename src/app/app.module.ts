@@ -16,8 +16,12 @@ import { ProductosComponent } from '@com/productos/productos.component';
 import { RubrosComponent } from '@com/rubros/rubros.component';
 import { CotizacionesComponent } from '@com/cotizaciones/cotizaciones.component';
 import { IngresosComponent } from './componentes/ingresos/ingresos.component';
-import { ListaItemsComponent } from './componentes/ingresos/lista-items.component';
+// Pipes
 import { KeysPipe } from './pipes/keys.pipe';
+// Servicios
+import { CotizacionesService } from './servicios/cotizaciones.service';
+import { ProductosService } from './servicios/productos.service';
+import { RubrosService } from './servicios/rubros.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,6 @@ import { KeysPipe } from './pipes/keys.pipe';
     RubrosComponent,
     CotizacionesComponent,
     IngresosComponent,
-    ListaItemsComponent,
     KeysPipe
   ],
   imports: [
@@ -40,7 +43,7 @@ import { KeysPipe } from './pipes/keys.pipe';
     HttpClientModule, 
     CommonModule
   ],
-  providers: [],
+  providers: [CotizacionesService, ProductosService, RubrosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

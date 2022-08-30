@@ -2,7 +2,7 @@ export interface Ingresos {
     id?: string,
     refFactura: string,
     fecha: Date,
-    idProducto: string,
+    codigo_barra: string,
     nombreProducto: string, 
     precioUnitario: number,
     cantidad: number,

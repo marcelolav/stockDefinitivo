@@ -14,9 +14,11 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-3">
-          <label for="numeroFactura" class="form-control">Referencia Factura</label>
-          <input type="text" id="numeroFactura" class="form-control" formControlName="refFactura" />
+        <div class="col-sm-8">
+          <div class="input-group">
+            <label for="numeroFactura" class="form-control">Referencia Factura</label>
+            <input type="text" id="numeroFactura" class="form-control" formControlName="refFactura" />
+          </div>
         </div>
       </div>
       <div class="row mt-4">
@@ -26,29 +28,34 @@
             type="text"
             id="idProducto"
             class="form-control"
-            formControlName="codigoProducto"
+            formControlName="codigo_barra"
             placeholder="escanee el código del producto..."
+            list="datosProducto"
+            (change)="onChangeEvent($event)"
           />
+          <datalist id="datosProducto">
+            <option *ngFor="let lista of listaProductos" value="{{lista.codigo_barra}}">
+          </datalist>
         </div>
         <div class="col-sm-5">
           <label for="nombreProducto" class="form-label">Descripción</label>
-          <input type="text" class="form-control" id="nombreProducto" formControlName="nombreProducto" />
+          <input type="text" class="form-control" id="nombreProducto" formControlName="nombreProducto"/>
         </div>
         <div class="col-sm-1">
           <label for="cantidadProducto" class="form-label">Cantidad</label>
-          <input type="number" class="form-control" id="cantidadProducto" formControlName="cantidad"/>
+          <input type="number" class="form-control" id="cantidadProducto" formControlName="cantidad">
         </div>
         <div class="col-sm-1">
           <label for="precioProducto" class="form-label">Precio</label>
-          <input type="number" class="form-control" id="precioProducto" formControlName="precioUnitario" />
+          <input type="number" class="form-control" id="precioProducto" formControlName="precioUnitario"/>
         </div>
         <div class="col-sm-2">
           <label for="subtotalProducto" class="form-label">Subtotal</label>
-          <input type="number" class="form-control" id="subtotalProducto" formControlName="importeTotal" />
+          <input type="number" class="form-control" id="subtotalProducto" formControlName="importeTotal" readonly/>
         </div>
         <div class="col-sm-1">
           <label for="botonAgregar"> Acciones </label>
-          <button id="botonAgregar" (click)="agregarItem(frmIngresos.value)" class="btn btn-primary">
+          <button id="botonAgregar" (click)="agregarItem(frmIngresos.value)" [disabled]="!frmIngresos.valid" class="btn btn-primary">
             Agregar
           </button>
         </div>
@@ -56,8 +63,28 @@
     </form>
   </div>
 </div>
-<div class="container"> 
+<div class="container" *ngIf="hayItems"> 
   <div class="row mt-5">
-    <app-lista-items [recibido] = "frmEnvio"></app-lista-items>
+   <!-- Listado de items que se ingresaron filtrados por la referencia -->
+   <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Código</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of tablaItems">
+        <td>{{ item.codigo_barra }}</td>
+        <td>{{ item.nombreProducto }}</td>
+        <td>{{ item.cantidad }}</td>
+        <td>{{ item.precioUnitario | currency: 'CAD':'symbol-narrow':'1.2-2'}}</td>
+        <td>{{ item.importeTotal | currency: 'CAD':'symbol-narrow':'1.2-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
   </div>
 </div>
