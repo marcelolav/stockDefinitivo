@@ -30,6 +30,7 @@ export class IngresosComponent implements OnInit {
     this.frmIngresos = new FormGroup({
       refFactura: new FormControl('', [Validators.required]),
       fecha: new FormControl('', [Validators.required]),
+      idProducto: new FormControl(''),
       nombreProducto: new FormControl(''),
       precioUnitario: new FormControl(0, [Validators.required]),
       cantidad: new FormControl(0, [Validators.required, Validators.min(1)]),
@@ -45,15 +46,14 @@ export class IngresosComponent implements OnInit {
       this.precioSubtotal = dato * this.precioUnitario;
       this.frmIngresos.patchValue({ importeTotal: this.precioSubtotal });
     });
-    this.frmIngresos
-      .get('nombreProducto')
-      ?.valueChanges.subscribe(async (dato) => {
-        // aca iria el filtro para que ponga el codigo_barra correspondiente de cada producto
-        const prodBuscado = await this.prdServ.obtenerProducto(
-          this.frmIngresos.get('nombreProducto')?.value
+    this.frmIngresos.get('nombreProducto')?.valueChanges.subscribe(async (dato) => {
+        // aca iria el filtro para que ponga el precio unitario del producto
+        const prodBuscado = await this.prdServ.obtenerProducto(this.frmIngresos.get('nombreProducto')?.value
         );
         this.precioUnitario = prodBuscado.precio_vp;
+        this.frmIngresos.patchValue({ idProducto: prodBuscado.id })
         this.frmIngresos.patchValue({ precioUnitario: this.precioUnitario });
+        console.log(this.frmIngresos.value);
       });
   }
 
@@ -73,8 +73,8 @@ export class IngresosComponent implements OnInit {
   // Graba todos los registros de items del ingreso recorriendo el array Tablaitems
   ingresarTotal() {
     this.tablaItems.forEach((x) => {
-      // this.ingServ.agregaIngreso(x);
-      this.ingServ.modificaCantidad(x.nombreProducto, x.cantidad);
+      this.ingServ.agregaIngreso(x);
+      this.ingServ.modificaCantidad(x.idProducto, x.cantidad);
       this.tablaItems = [];
       this.hayItems = false;
       this.frmIngresos.reset();
