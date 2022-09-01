@@ -15,13 +15,7 @@ export class IngresosComponent implements OnInit {
   listaProductos: Productos[] = [];
   hayItems: boolean = false;
   tablaItems: Ingresos[] = [];
-
-  // temporal hardcode
-  nombreProducto: string = '';
-  precioUnitario: number = 0;
-  cantidad: number = 0;
-  precioSubtotal: number = 0;
-  importeTotal: number = 0;
+  totalGeneral: number = 0;
 
   constructor(
     private prdServ: ProductosService,
@@ -32,27 +26,51 @@ export class IngresosComponent implements OnInit {
       fecha: new FormControl('', [Validators.required]),
       idProducto: new FormControl(''),
       nombreProducto: new FormControl(''),
-      precioUnitario: new FormControl(0, [Validators.required]),
-      cantidad: new FormControl(0, [Validators.required, Validators.min(1)]),
+      precioUnitario: new FormControl(0),
+      precioNuevo: new FormControl(0),
+      cantidadActual: new FormControl(0),
+      cantidadIngreso: new FormControl(0, [Validators.required, Validators.min(1)]),
+      cantidadNueva: new FormControl(0),
       importeTotal: new FormControl(0),
     });
-    this.frmIngresos.get('precioUnitario')?.valueChanges.subscribe((dato) => {
-      this.precioUnitario = dato;
-      this.precioSubtotal = dato * this.cantidad;
-      this.frmIngresos.patchValue({ importeTotal: this.precioSubtotal });
-    });
-    this.frmIngresos.get('cantidad')?.valueChanges.subscribe((dato) => {
-      this.cantidad = dato;
-      this.precioSubtotal = dato * this.precioUnitario;
-      this.frmIngresos.patchValue({ importeTotal: this.precioSubtotal });
+    // calculo y pongo resultados en campos de form frmIngresos
+
+    // Calculo subtotal de la linea de item (precio original)
+    // this.frmIngresos.get('precioUnitario')?.valueChanges.subscribe((dato) => {
+    //   let cantIng = this.frmIngresos.get('cantidadIngreso')?.value;
+    //   let pSubtot = dato * cantIng
+    //   this.frmIngresos.patchValue({ importeTotal: pSubtot });
+    // });
+    // calculo subtotal de linea si el precio cambia o se actualiza
+    this.frmIngresos.get('precioNuevo')?.valueChanges.subscribe((dato) => {
+      let cantIng = this.frmIngresos.get('cantidadIngreso')?.value;
+      let precio1 = this.frmIngresos.get('precioUnitario')?.value;
+      let precio2 = this.frmIngresos.get('precioNuevo')?.value;
+      if( precio1 < precio2) {
+        this.frmIngresos.patchValue({ importeTotal: cantIng * precio2 });
+      } else {
+        this.frmIngresos.patchValue({ importeTotal: cantIng * precio1 });
+      }
+    })
+    // Calculo lo mismo de antes si se actualiza la cantidad
+    this.frmIngresos.get('cantidadIngreso')?.valueChanges.subscribe((dato) => {
+      let precio1 = this.frmIngresos.get('precioUnitario')?.value;
+      let precio2 = this.frmIngresos.get('precioNuevo')?.value;
+      let cantIng = this.frmIngresos.get('cantidadIngreso')?.value;
+      let cantExi = this.frmIngresos.get('cantidadActual')?.value;
+      this.frmIngresos.patchValue({ cantidadNueva: parseFloat(cantExi) + parseFloat(cantIng)})
+      if( precio2 > precio1) {
+         this.frmIngresos.patchValue({ importeTotal: precio2 * cantIng });
+      } else {
+         this.frmIngresos.patchValue({ importeTotal: precio1 * cantIng});
+      }
     });
     this.frmIngresos.get('nombreProducto')?.valueChanges.subscribe(async (dato) => {
         // aca iria el filtro para que ponga el precio unitario del producto
-        const prodBuscado = await this.prdServ.obtenerProducto(this.frmIngresos.get('nombreProducto')?.value
-        );
-        this.precioUnitario = prodBuscado.precio_vp;
+        const prodBuscado = await this.prdServ.obtenerProducto(this.frmIngresos.get('nombreProducto')?.value);
+        this.frmIngresos.patchValue({ precioUnitario: prodBuscado.precio_vp});
+        this.frmIngresos.patchValue({ cantidadActual: prodBuscado.stock});
         this.frmIngresos.patchValue({ idProducto: prodBuscado.id })
-        this.frmIngresos.patchValue({ precioUnitario: this.precioUnitario });
         console.log(this.frmIngresos.value);
       });
   }
@@ -66,18 +84,28 @@ export class IngresosComponent implements OnInit {
   // Agrega un item nuevo y calcula el total generl con variable incrementable
   agregarItem(dato: any) {
     this.tablaItems.push(dato);
-    this.importeTotal = this.importeTotal + dato.importeTotal;
+    this.totalGeneral = this.totalGeneral + dato.importeTotal;
     this.hayItems = true;
+    console.log('TablaItems Array ->' , this.tablaItems);
   }
 
   // Graba todos los registros de items del ingreso recorriendo el array Tablaitems
   ingresarTotal() {
     this.tablaItems.forEach((x) => {
       this.ingServ.agregaIngreso(x);
-      this.ingServ.modificaCantidad(x.idProducto, x.cantidad);
+      let cantModificar = x.cantidadIngreso + this.frmIngresos.get('cantidadActual')?.value
+      if (x.importeTotal < x.precioNuevo) {
+        this.ingServ.modificarProducto(x.idProducto, x.cantidadNueva, x.precioNuevo)
+      } else {
+        this.ingServ.modificarProducto(x.idProducto, x.cantidadNueva, x.importeTotal)
+      }
       this.tablaItems = [];
       this.hayItems = false;
       this.frmIngresos.reset();
     });
+  }
+
+  actualizarItems() {
+    // Esto se refactorizo de todo lo anterior para reusar cosas
   }
 }

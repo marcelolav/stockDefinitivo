@@ -31,12 +31,24 @@
           
         </div>
         <div class="col-sm-1">
-          <label for="cantidadProducto" class="form-label">Cantidad</label>
-          <input type="number" class="form-control" id="cantidadProducto" formControlName="cantidad">
+          <label for="cantActual" class="form-label">Existente</label>
+          <input type="number" class="form-control" id="cantActual" formControlName="cantidadActual" readonly>
         </div>
         <div class="col-sm-1">
-          <label for="precioProducto" class="form-label">Precio</label>
-          <input type="number" class="form-control" id="precioProducto" formControlName="precioUnitario" readonly/>
+          <label for="cantidadIngreso" class="form-label">Ingreso</label>
+          <input type="number" class="form-control" id="cantidadIngreso" formControlName="cantidadIngreso">
+        </div>
+        <div class="col-sm-1">
+          <label for="cantActual" class="form-label">Stock</label>
+          <input type="number" class="form-control" id="cantActual" formControlName="cantidadNueva" readonly>
+        </div>
+        <div class="col-sm-1">
+          <label for="precioExistente" class="form-label">Precio 1</label>
+          <input type="number" class="form-control" id="precioExistente" formControlName="precioUnitario" readonly/>
+        </div>
+        <div class="col-sm-1">
+          <label for="precioNuevo" class="form-label">Precio 2</label>
+          <input type="number" class="form-control" id="precioNuevo" formControlName="precioNuevo"/>
         </div>
         <div class="col-sm-2">
           <label for="subtotalProducto" class="form-label">Subtotal</label>
@@ -69,7 +81,7 @@
       <tr *ngFor="let item of tablaItems">
         <td>{{ item.refFactura }}</td>
         <td>{{ item.nombreProducto }}</td>
-        <td>{{ item.cantidad }}</td>
+        <td>{{ item.cantidadIngreso }}</td>
         <td>{{ item.precioUnitario | currency: 'CAD':'symbol-narrow':'1.2-2'}}</td>
         <td>{{ item.importeTotal | currency: 'CAD':'symbol-narrow':'1.2-2' }}</td>
       </tr>
@@ -78,7 +90,7 @@
     
   </table>
   <div class="row mt-5 border">
-     <p class="text-end fs-5 fw-bold">Total General Ingreso: {{importeTotal | currency: 'CAD':'symbol-narrow':'1.2-2'}} </p>
+     <p class="text-end fs-5 fw-bold">Total General Ingreso: {{totalGeneral | currency: 'CAD':'symbol-narrow':'1.2-2'}} </p>
   </div>
   <div class="row">
     <div class="col-md-12 justify-content-center mt-2">
