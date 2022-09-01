@@ -1,27 +1,53 @@
 # StockDefinitivo
+Sistema de control de inventario realizado en Angular [Angular CLI](https://github.com/angular/angular-cli) version 14.1.1.
+Este sistema se apoya en la base de datos de Firestore (V9) y @angular/fire por lo que requiere archivo de configuracion en 
+la carpeta src/app/environments el cual debe ser generado con vuestras propias credenciales proporcionadas por Firestore/Firebase de Google
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.1.
+El archivo es similar a esto:
 
-## Development server
+`
+export const environment = {
+    production: false,
+    firebase: {
+      projectId: 'xxxxxx',
+      appId: 'xxxxxx',
+      storageBucket: 'xxxxxx',
+      locationId: 'us-central',
+      apiKey: 'xxxxxx',
+      authDomain: 'xxxxxx',
+      messagingSenderId: 'xxxxxx',
+      measurementId: 'xxxxxx',
+    }
+  }
+`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+donde evidentemente las `xxxxxx`  son las credenciales proporcionadas por Google desde:  [Firebase](https://firebase.google.com/) Aqui se debe crear una cuenta y
+realizar los pasos de la ayuda que se requieran por página.
 
-## Code scaffolding
+## Pre-Requisitos
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Se debe instalar NodeJS y de forma global (para desarrollos) el @angular/cli
 
-## Build
+## Notas para desarrollo
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+`ng serve` Inicia el servidor para desarrollo.  Navegar dentro de `http://localhost:4200/`.  Los cambios que se realicen se recargaran automáticamente en el servidor de desarrollo
 
-## Running unit tests
+## Scaffolding
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+`ng generate component component-name` genera un nuevo componente.
+`ng generate service service-name` genera un nuevo servicio.
+`ng generate interface interface-name` genera un nuevo interface. y asi...
 
-## Running end-to-end tests
+ Se pueden usar los comandos siguientes `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Build del proyecto
 
-## Further help
+Ejecutar `ng build`. Todo el codigo del build se guarda en la carpeta `dist/`.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Mas ayuda y contacto con desarrollador
+
+Página de referencia del CLI de angular [Angular CLI Overview and Command Reference](https://angular.io/cli).
+Página de referencia del lenguaje [Angular](https://angular.io)
+Página de referencia de [NodeJS](https://nodejs.org/en/) 
+
+Mail del autor:  [Marcelo Lavandeira](mailto:marcelo.lavandeira@gmail.com)
