@@ -14,11 +14,7 @@ export class CotizacionesComponent implements OnInit {
   ngOnInit(): void {
     this.coti.getCotizaciones().subscribe((data) => {
       this.listaCotizaciones = data;
-      console.log(this.listaCotizaciones);
     });
   }
 
-  displayInfo(){
-    console.log(this.listaCotizaciones);
-  }
 }

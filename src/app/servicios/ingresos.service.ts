@@ -24,15 +24,6 @@ export class IngresosService {
     return addDoc(prodRef, ingreso);
   }
 
-  // Modificar cantidad del producto sumando la entrada a lo que existe en base al producto
-  modificaCantidad(idProducto: string, cantIngreso: number) {
-    const prodRef = this.obtenerProducto(idProducto);
-    console.log('datos ingresados->> ', idProducto, cantIngreso)
-    console.log('referencia buscada:',prodRef)
-    
-    //console.log(idProducto, cantIngreso);
-  }
-
   modificarProducto(id: string, stock: number, precio: number) {
     const modificar = {
       "precio_cp": precio,

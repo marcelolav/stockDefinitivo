@@ -33,14 +33,6 @@ export class IngresosComponent implements OnInit {
       cantidadNueva: new FormControl(0),
       importeTotal: new FormControl(0),
     });
-    // calculo y pongo resultados en campos de form frmIngresos
-
-    // Calculo subtotal de la linea de item (precio original)
-    // this.frmIngresos.get('precioUnitario')?.valueChanges.subscribe((dato) => {
-    //   let cantIng = this.frmIngresos.get('cantidadIngreso')?.value;
-    //   let pSubtot = dato * cantIng
-    //   this.frmIngresos.patchValue({ importeTotal: pSubtot });
-    // });
     // calculo subtotal de linea si el precio cambia o se actualiza
     this.frmIngresos.get('precioNuevo')?.valueChanges.subscribe((dato) => {
       let cantIng = this.frmIngresos.get('cantidadIngreso')?.value;
@@ -71,7 +63,6 @@ export class IngresosComponent implements OnInit {
         this.frmIngresos.patchValue({ precioUnitario: prodBuscado.precio_vp});
         this.frmIngresos.patchValue({ cantidadActual: prodBuscado.stock});
         this.frmIngresos.patchValue({ idProducto: prodBuscado.id })
-        console.log(this.frmIngresos.value);
       });
   }
 
@@ -86,7 +77,6 @@ export class IngresosComponent implements OnInit {
     this.tablaItems.push(dato);
     this.totalGeneral = this.totalGeneral + dato.importeTotal;
     this.hayItems = true;
-    console.log('TablaItems Array ->' , this.tablaItems);
   }
 
   // Graba todos los registros de items del ingreso recorriendo el array Tablaitems

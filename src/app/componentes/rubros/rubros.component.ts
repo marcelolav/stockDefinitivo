@@ -27,7 +27,6 @@ export class RubrosComponent implements OnInit {
   }
 
   eliminarRubro(rubro: Rubros) {
-    console.log(rubro);
     if (confirm('¿Está seguro de eliminar el rubro?')) {
       this.rubrosService.borrarRubro(rubro);
     }
