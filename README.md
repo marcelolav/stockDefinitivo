@@ -4,11 +4,10 @@ Este sistema se apoya en la base de datos de Firestore (V9) y @angular/fire por 
 la carpeta src/app/environments el cual debe ser generado con vuestras propias credenciales proporcionadas por Firestore/Firebase de Google
 
 El archivo es similar a esto:
-
-`
+```
 export const environment = {
-    production: false,
-    firebase: {
+      production: false,
+      firebase: {
       projectId: 'xxxxxx',
       appId: 'xxxxxx',
       storageBucket: 'xxxxxx',
@@ -19,7 +18,7 @@ export const environment = {
       measurementId: 'xxxxxx',
     }
   }
-`
+```
 
 donde evidentemente las `xxxxxx`  son las credenciales proporcionadas por Google desde:  [Firebase](https://firebase.google.com/) Aqui se debe crear una cuenta y
 realizar los pasos de la ayuda que se requieran por página.
