@@ -1,4 +1,8 @@
-# StockDefinitivo
+<h1 align="center"> Sistema de Inventario </h1>
+
+ ![Badge en Desarollo](https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green)
+
+ 
 Sistema de control de inventario realizado en Angular [Angular CLI](https://github.com/angular/angular-cli) version 14.1.1.
 Este sistema se apoya en la base de datos de Firestore (V9) y @angular/fire por lo que requiere archivo de configuracion en 
 la carpeta src/app/environments el cual debe ser generado con vuestras propias credenciales proporcionadas por Firestore/Firebase de Google
@@ -21,7 +25,8 @@ export const environment = {
 ```
 
 donde evidentemente las `xxxxxx`  son las credenciales proporcionadas por Google desde:  [Firebase](https://firebase.google.com/) Aqui se debe crear una cuenta y
-realizar los pasos de la ayuda que se requieran por página.
+realizar los pasos de la ayuda que se requieran por página.  
+
 
 ## Pre-Requisitos
 
