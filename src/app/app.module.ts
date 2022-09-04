@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +10,7 @@ import { HttpClientModule} from '@angular/common/http'
 // Firebase
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+// import { AuthModule } from '@angular/fire/auth'
 import { environment } from '@env/environment';
 // Forms reactivos
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +24,7 @@ import { KeysPipe } from './pipes/keys.pipe';
 import { CotizacionesService } from './servicios/cotizaciones.service';
 import { ProductosService } from './servicios/productos.service';
 import { RubrosService } from './servicios/rubros.service';
+import { LoginComponent } from './componentes/login/login.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { RubrosService } from './servicios/rubros.service';
     RubrosComponent,
     CotizacionesComponent,
     IngresosComponent,
-    KeysPipe
+    KeysPipe,
+    LoginComponent
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -41,7 +45,8 @@ import { RubrosService } from './servicios/rubros.service';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule, 
-    CommonModule
+    CommonModule, 
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [CotizacionesService, ProductosService, RubrosService],
   bootstrap: [AppComponent]
