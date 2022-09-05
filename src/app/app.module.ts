@@ -22,7 +22,6 @@ import { LoginComponent } from './componentes/login/login.component';
 // Pipes
 import { KeysPipe } from './pipes/keys.pipe';  // Esta por futuros usos
 // Servicios
-import { CotizacionesService } from './servicios/cotizaciones.service';
 import { ProductosService } from './servicios/productos.service';
 import { RubrosService } from './servicios/rubros.service';
 import { LoginService } from './servicios/login.service';
@@ -50,7 +49,7 @@ import { LoginService } from './servicios/login.service';
     CommonModule, 
     ToastrModule.forRoot(), // ToastrModule added
   ],
-  providers: [CotizacionesService, ProductosService, RubrosService, LoginService],
+  providers: [ProductosService, RubrosService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
