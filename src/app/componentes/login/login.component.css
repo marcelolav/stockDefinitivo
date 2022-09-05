@@ -4,4 +4,7 @@ input {
 }
 .card {
     background-color: aquamarine;
+    width: 60%;
+    align-content: center;
+    padding: 20px;
 }

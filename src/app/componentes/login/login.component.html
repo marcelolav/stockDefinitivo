@@ -1,41 +1,27 @@
-<p>
-  Auth!
-  <code>{{ (user | async)?.uid }}</code>
-  <button (click)="login()" *ngIf="showLoginButton">Log in with Google</button>
-  <button (click)="loginAnonymously()" *ngIf="showLoginButton">Log in anonymously</button>
-  <button (click)="logout()" *ngIf="showLogoutButton">Log out</button>
-</p>
-
-
-<!-- <div class="row mt-5">
-  <div class="col-lg-6 offset-lg-3">
-    <h2 class="text-center">
-      Ingreso al sistema
-      <div class="card mt-4">
-        <div class="card-body">
-          <form [formGroup]="frmLogin" class="form-control">
-            <input
-              type="text"
-              class="form-control form-control-lg"
-              placeholder="Ingrese su usuario..."
-              formControlName="usuario"
-            />
-            <input
-              type="text"
-              class="form-control form-control-lg mt-3"
-              placeholder="Ingrese Contraseña..."
-              formControlName="password"
-            />
-            <button
-              class="btn btn-primary mt-4"
-              (click)="ingresoUsuario(frmLogin.value)"
-            >
-            <i class="bi bi-key"></i>  Ingresar
-            </button>
-            <button class="btn btn-danger mt-4"><i class="bi bi-x-circle"></i>  Cancelar</button>
+<div class="container text-center">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-title">Ingreso de usuario</div>
+        <div class="card-content">
+          <form [formGroup]="loginUsuarioForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="text" class="form-control" formControlName="email" autocomplete="off" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                formControlName="password"
+                autocomplete="off"
+              />
+            </div>
+            <input type="submit" value="Enviar" />
           </form>
         </div>
       </div>
-    </h2>
+    </div>
   </div>
-</div> -->
+</div>

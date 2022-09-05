@@ -10,7 +10,7 @@ import { HttpClientModule} from '@angular/common/http'
 // Firebase
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-// import { AuthModule } from '@angular/fire/auth'
+import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from '@env/environment';
 // Forms reactivos
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,13 +18,14 @@ import { ProductosComponent } from '@com/productos/productos.component';
 import { RubrosComponent } from '@com/rubros/rubros.component';
 import { CotizacionesComponent } from '@com/cotizaciones/cotizaciones.component';
 import { IngresosComponent } from './componentes/ingresos/ingresos.component';
+import { LoginComponent } from './componentes/login/login.component';
 // Pipes
-import { KeysPipe } from './pipes/keys.pipe';
+import { KeysPipe } from './pipes/keys.pipe';  // Esta por futuros usos
 // Servicios
 import { CotizacionesService } from './servicios/cotizaciones.service';
 import { ProductosService } from './servicios/productos.service';
 import { RubrosService } from './servicios/rubros.service';
-import { LoginComponent } from './componentes/login/login.component';
+import { LoginService } from './servicios/login.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { LoginComponent } from './componentes/login/login.component';
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -48,7 +50,7 @@ import { LoginComponent } from './componentes/login/login.component';
     CommonModule, 
     ToastrModule.forRoot(), // ToastrModule added
   ],
-  providers: [CotizacionesService, ProductosService, RubrosService],
+  providers: [CotizacionesService, ProductosService, RubrosService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+// Autenticacion de firebase
+import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+
 // Componentes para las rutas
 import { CotizacionesComponent } from '@com/cotizaciones/cotizaciones.component';
 import { IngresosComponent } from '@com/ingresos/ingresos.component';
@@ -9,10 +13,10 @@ import { LoginComponent } from './componentes/login/login.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent },
-  {path: 'productos', component: ProductosComponent},
-  {path: 'rubros', component: RubrosComponent},
-  {path: 'cotizaciones', component: CotizacionesComponent},
-  {path: 'ingresos', component: IngresosComponent }
+  {path: 'productos', component: ProductosComponent, ...canActivate(()=>redirectUnauthorizedTo(['/login']))},
+  {path: 'rubros', component: RubrosComponent, ...canActivate(()=>redirectUnauthorizedTo(['/login']))},
+  {path: 'cotizaciones', component: CotizacionesComponent, ...canActivate(()=>redirectUnauthorizedTo(['/login']))},
+  {path: 'ingresos', component: IngresosComponent, ...canActivate(()=>redirectUnauthorizedTo(['/login'])) }
 ];
 
 @NgModule({

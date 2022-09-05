@@ -67,7 +67,16 @@
             >Login</a
           >
         </li>
-
+      </ul>
+      <ul *ngIf="estaLogueado" class="navbar-nav d-flex">
+        <li class="nav-item">
+          <a
+            class="nav-link active btn btn-primary"
+            aria-current="page"
+            (click)="salidaUsuario()"
+            >Salir</a
+          >
+        </li>
       </ul>
     </div>
   </div>
