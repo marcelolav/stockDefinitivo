@@ -32,13 +32,4 @@ export class IngresosService {
     this.ps.editarProducto(id, modificar);
   }
 
-  async obtenerProducto(id: string) {
-    const prdRef = collection(this.fs, "productos");
-    const q = query(prdRef, where("id", "==", id));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      this.docBusqueda = doc.data(); 
-    });
-    return this.docBusqueda;
-  }
 }

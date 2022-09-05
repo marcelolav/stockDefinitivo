@@ -25,6 +25,7 @@ import { KeysPipe } from './pipes/keys.pipe';  // Esta por futuros usos
 import { ProductosService } from './servicios/productos.service';
 import { RubrosService } from './servicios/rubros.service';
 import { LoginService } from './servicios/login.service';
+import { SalidasComponent } from './componentes/salidas/salidas.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { LoginService } from './servicios/login.service';
     CotizacionesComponent,
     IngresosComponent,
     KeysPipe,
-    LoginComponent
+    LoginComponent,
+    SalidasComponent
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
