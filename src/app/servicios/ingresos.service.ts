@@ -2,9 +2,14 @@ import { Injectable } from '@angular/core';
 import {
   addDoc,
   collection,
-  Firestore, 
+  collectionData,
+  Firestore,
+  getDocs,
+  orderBy,
+  query,
 } from '@angular/fire/firestore';
 import { Ingresos } from '@app/modelos/ingresos';
+import { Observable } from 'rxjs';
 import { ProductosService } from './productos.service';
 
 @Injectable({
@@ -19,5 +24,9 @@ export class IngresosService {
     const prodRef = collection(this.fs, 'ingresos');
     return addDoc(prodRef, ingreso);
   }
-
+  // Envia todos los ingresos registrados a un array de productos
+  obtenerIngresos(): Observable<Ingresos[]> {
+    const prodRef = collection(this.fs, 'ingresos');
+    return collectionData(prodRef, { idField: 'id' }) as Observable<Ingresos[]>;
+  }
 }
