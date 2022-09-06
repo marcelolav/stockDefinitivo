@@ -9,7 +9,8 @@ import { IngresosService } from '@srv/ingresos.service';
 })
 export class ConsultaIngresosComponent implements OnInit {
   
-  searchValue: string = ''
+  searchValueFecha: string = '';
+
   listaIngresos: Ingresos[] = []
   
   constructor(private ingServ: IngresosService) { }

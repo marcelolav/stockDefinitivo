@@ -9,6 +9,7 @@ import { SalidasService } from '@app/servicios/salidas.service';
 })
 export class ConsultaSalidasComponent implements OnInit {
 
+  searchValueFecha: string = '';
   listaSalidas: Salidas[] = []
 
   constructor(private salServ: SalidasService) { }
