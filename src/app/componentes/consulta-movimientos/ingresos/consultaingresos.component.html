@@ -1,5 +1,8 @@
 <h5 class="text-center">Listado de Ingresos por Fecha</h5>
-
+<div class="input-box">
+  <label for="search">Buscar</label>
+  <input type="text" name="searchValue" [(ngModel)]="searchValue" />
+</div>
 <table class="table table-striped table-bordered border-primary">
     <thead>
       <tr>
@@ -10,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of listaIngresos | order: 'fecha'">
+      <tr *ngFor="let item of listaIngresos | order: 'fecha' | filter: searchValue">
         <th>{{item.fecha | date: 'dd-MM-yyyy'}}</th>
         <td>{{item.nombreProducto}} </td>
         <td class="text-end">{{item.cantidadIngreso | number}}</td>

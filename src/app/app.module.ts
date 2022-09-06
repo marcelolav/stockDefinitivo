@@ -31,7 +31,7 @@ import { ConsultaPreciosComponent } from '@com/consulta-precios/consulta-precios
 
 // Pipes
 import { KeysPipe } from './pipes/keys.pipe';  // Esta por futuros usos
-import { FilterPipe } from '@app/pipes/filter-pipe.pipe' ;
+import { FilterPipe } from '@app/pipes/filter-pipe' ;
 // Servicios
 import { ProductosService } from '@srv/productos.service';
 import { RubrosService } from '@srv/rubros.service';
