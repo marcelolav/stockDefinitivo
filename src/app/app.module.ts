@@ -37,6 +37,7 @@ import { ProductosService } from '@srv/productos.service';
 import { RubrosService } from '@srv/rubros.service';
 import { LoginService } from '@srv/login.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OrderPipe } from './pipes/order.pipe';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ConsultaIngresosComponent,
     ConsultaSalidasComponent,
     ConsultaStockComponent,
-    ConsultaPreciosComponent
+    ConsultaPreciosComponent,
+    OrderPipe
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),

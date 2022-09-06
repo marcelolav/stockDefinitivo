@@ -16,15 +16,6 @@ export class ConsultaIngresosComponent implements OnInit {
   ngOnInit(): void {
     this.ingServ.obtenerIngresos().subscribe(datos => {
       this.listaIngresos = datos;
-     
     })
-    //this.listaIngresos = this.ingServ.obtenerIngresosPorFecha()
   }
-  // sortTable(prop: string) {
-  //   this.path = prop.split('.');
-  //   this.order = this.order * (-1); 
-  //   return false; 
-  // }
-
-  
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Salidas } from '@app/modelos/salidas';
+import { SalidasService } from '@app/servicios/salidas.service';
 
 @Component({
   selector: 'app-consultasalidas',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultaSalidasComponent implements OnInit {
 
-  constructor() { }
+  listaSalidas: Salidas[] = []
+
+  constructor(private salServ: SalidasService) { }
 
   ngOnInit(): void {
+    this.salServ.obtenerSalidas().subscribe(datos => {
+      this.listaSalidas = datos;
+    })
   }
 
 }
