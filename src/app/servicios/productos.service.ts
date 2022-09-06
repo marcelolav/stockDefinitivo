@@ -42,4 +42,12 @@ export class ProductosService {
     );
     return this.docBusqueda;
   }
+  modificarProducto(id: string, stock: number, precio: number) {
+    const modificar = {
+      "precio_cp": precio,
+      "stock": stock
+    }
+    this.editarProducto(id, modificar);
+  }
+
 }

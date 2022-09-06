@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Ingresos } from '@app/modelos/ingresos';
-import { Productos } from '@app/modelos/productos';
+import { Ingresos } from '@mdl/ingresos';
+import { Productos } from '@mdl/productos';
 import { ProductosService } from '@srv/productos.service';
 import { IngresosService } from '@srv/ingresos.service';
 
@@ -85,9 +85,9 @@ export class IngresosComponent implements OnInit {
       this.ingServ.agregaIngreso(x);
       let cantModificar = x.cantidadIngreso + this.frmIngresos.get('cantidadActual')?.value
       if (x.importeTotal < x.precioNuevo) {
-        this.ingServ.modificarProducto(x.idProducto, x.cantidadNueva, x.precioNuevo)
+        this.prdServ.modificarProducto(x.idProducto, x.cantidadNueva, x.precioNuevo)
       } else {
-        this.ingServ.modificarProducto(x.idProducto, x.cantidadNueva, x.importeTotal)
+        this.prdServ.modificarProducto(x.idProducto, x.cantidadNueva, x.importeTotal)
       }
       this.tablaItems = [];
       this.hayItems = false;
@@ -95,7 +95,5 @@ export class IngresosComponent implements OnInit {
     });
   }
 
-  actualizarItems() {
-    // Esto se refactorizo de todo lo anterior para reusar cosas
-  }
+ 
 }

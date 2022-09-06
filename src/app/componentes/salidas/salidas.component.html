@@ -1,7 +1,100 @@
 <div class="container">
     <div class="row text-center">
-        <div class="shadow-lg mp-3 mt-3 mb-3 bg-body rounded">
-            <h4>Salidas de Mercaderías del depósito</h4>
+      <div class="shadow-lg mp-3 mt-3 mb-3 bg-body rounded">
+        <h4>Salidas de Mercadería desde Depósito</h4>
+      </div>
+      <form [formGroup]="frmSalidas">
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="input-group">
+              <label for="fecha" class="form-control">Fecha</label>
+              <input type="date" class="form-control" id="fecha" formControlName="fecha"  />
+              <div class="input-group-addon">
+                <span class="glyphicon glyphicon-th"></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <div class="input-group">
+              <label for="numeroFactura" class="form-control">Referencia Factura</label>
+              <input type="text" id="numeroFactura" class="form-control" formControlName="refFactura" />
+            </div>
+          </div>
         </div>
+        <div class="row mt-4">
+          <div class="col-sm-5">
+            <label for="nombreProducto" class="form-label">Descripción</label>
+            <select name="nombreProducto" id="nombreProducto" formControlName="nombreProducto" class="form-control">
+              <option *ngFor="let prod of listaProductos" value="{{prod.nombre}}" class="form-control">{{prod.nombre}} </option>
+            </select>
+          </div>
+          <div class="col-sm-1">
+            <label for="cantActual" class="form-label">Existente</label>
+            <input type="number" class="form-control" id="cantActual" formControlName="cantidadActual" readonly>
+          </div>
+          <div class="col-sm-1">
+            <label for="cantidadSalida" class="form-label">Salida</label>
+            <input type="number" class="form-control" id="cantidadSalida" formControlName="cantidadSalida">
+          </div>
+          <div class="col-sm-1">
+            <label for="cantActual" class="form-label">Stock</label>
+            <input type="number" class="form-control" id="cantActual" formControlName="cantidadNueva" readonly>
+          </div>
+          <div class="col-sm-1">
+            <label for="precioExistente" class="form-label">Precio 1</label>
+            <input type="number" class="form-control" id="precioExistente" formControlName="precioUnitario" readonly/>
+          </div>
+          <div class="col-sm-1">
+            <label for="precioNuevo" class="form-label">Precio 2</label>
+            <input type="number" class="form-control" id="precioNuevo" formControlName="precioNuevo"/>
+          </div>
+          <div class="col-sm-2">
+            <label for="subtotalProducto" class="form-label">Subtotal</label>
+            <input type="number" class="form-control" id="subtotalProducto" formControlName="importeTotal" readonly/>
+          </div>
+          <div class="col-sm-1">
+            <label for="botonAgregar"> Acciones </label>
+            <button id="botonAgregar" (click)="agregarItem(frmSalidas.value)" [disabled]="!frmSalidas.valid" class="btn btn-primary mt-1">
+              Agregar
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
-</div>
+  </div>
+  <div class="container" *ngIf="hayItems"> 
+    <div class="row mt-5">
+     <!-- Listado de items que se ingresaron filtrados por la referencia -->
+     <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Código</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of tablaItems">
+          <td>{{ item.refFactura }}</td>
+          <td>{{ item.nombreProducto }}</td>
+          <td>{{ item.cantidadSalida }}</td>
+          <td>{{ item.precioUnitario | currency: 'CAD':'symbol-narrow':'1.2-2'}}</td>
+          <td>{{ item.importeTotal | currency: 'CAD':'symbol-narrow':'1.2-2' }}</td>
+        </tr>
+      </tbody>
+  
+      
+    </table>
+    <div class="row mt-5 border">
+       <p class="text-end fs-5 fw-bold">Total General Salida: {{totalGeneral | currency: 'CAD':'symbol-narrow':'1.2-2'}} </p>
+    </div>
+    <div class="row">
+      <div class="col-md-12 justify-content-center mt-2">
+        <button class="btn btn-primary" (click)="ingresarTotal()">Finalizar Salida</button>
+      </div>
+    </div>
+    </div>
+  </div>
+  
