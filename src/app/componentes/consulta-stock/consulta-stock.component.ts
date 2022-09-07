@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Productos } from '@app/modelos/productos';
+import { ProductosService } from '@app/servicios/productos.service';
 
 @Component({
   selector: 'app-consulta-stock',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultaStockComponent implements OnInit {
 
-  constructor() { }
+  filtroProducto: string = '';
+  productos: Productos[] = [];
+  constructor(private prdServ: ProductosService) { }
+
 
   ngOnInit(): void {
+    this.prdServ.obtenerProductos().subscribe(datos => {
+      this.productos = datos;
+    })
   }
 
 }

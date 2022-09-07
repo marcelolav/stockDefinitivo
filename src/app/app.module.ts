@@ -13,6 +13,10 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from '@env/environment';
+
+// Bootstrap desde modulo ngb
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 // Forms reactivos
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from '@com/login/login.component';
@@ -36,8 +40,8 @@ import { FilterPipe } from '@app/pipes/filter-pipe' ;
 import { ProductosService } from '@srv/productos.service';
 import { RubrosService } from '@srv/rubros.service';
 import { LoginService } from '@srv/login.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrderPipe } from './pipes/order.pipe';
+import { FiltroNombreProductoPipe } from './pipes/filtro-nombre-producto.pipe';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,8 @@ import { OrderPipe } from './pipes/order.pipe';
     ConsultaSalidasComponent,
     ConsultaStockComponent,
     ConsultaPreciosComponent,
-    OrderPipe
+    OrderPipe,
+    FiltroNombreProductoPipe
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),

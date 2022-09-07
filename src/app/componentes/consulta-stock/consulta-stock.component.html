@@ -1,1 +1,41 @@
-<p>consulta-stock works!</p>
+<div class="row input-group">
+    <div class="input-group mb-3 ms-2">
+      <span class="input-group-text" id="basic-addon1"
+        ><i class="bi bi-search"></i
+      ></span>
+      <input
+        type="text"
+        name="searchValue"
+        id="fecha"
+        placeholder="Nombre del producto..."
+        class="form-control text-center"
+        [(ngModel)]="filtroProducto"
+        aria-describedby="basic-addon1"
+        (ngModelChange)="filtroProducto = $event.toUpperCase()"
+      />
+    </div>
+  </div>
+
+
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Codigo</th>
+        <th>Descripción</th>
+        <th>Stock</th>
+        <th>Mínimo</th>
+        <th>Rubro</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prod of productos | filtroNombreProducto: filtroProducto">
+        <td>{{ prod.codigo_barra }}</td>
+        <td>{{ prod.nombre }}</td>
+        <td>{{ prod.stock }}</td>
+        <td>{{ prod.minimo }}</td>
+        <td>{{ prod.rubro }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
