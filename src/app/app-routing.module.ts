@@ -13,7 +13,8 @@ import { LoginComponent } from '@com/login/login.component';
 import { SalidasComponent } from '@com/salidas/salidas.component';
 import { ConsultaMovimientosComponent } from '@com/consulta-movimientos/consulta-movimientos.component';
 import { ConsultaStockComponent } from '@com/consulta-stock/consulta-stock.component';
-import { ConsultaPreciosComponent } from '@com/consulta-precios/consulta-precios.component';
+import { ConsultaPreciosNombreComponent } from '@com/consulta-precios-nombre/consulta-precios-nombre.component';
+import { ConsultaPreciosCodigoComponent } from '@com/consulta-precios-codigo/consulta-precios-codigo.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent },
@@ -24,7 +25,8 @@ const routes: Routes = [
   {path: 'salidas', component: SalidasComponent, ...canActivate(()=>redirectUnauthorizedTo(['/login'])) },
   {path: 'consultaMovimientos', component: ConsultaMovimientosComponent, ...canActivate(()=>redirectUnauthorizedTo(['/login'])) },
   {path: 'consultaStock', component: ConsultaStockComponent, ...canActivate(()=>redirectUnauthorizedTo(['/login'])) },
-  {path: 'consultaPrecios', component: ConsultaPreciosComponent, ...canActivate(()=>redirectUnauthorizedTo(['/login'])) }
+  {path: 'consultaPreciosNombre', component: ConsultaPreciosNombreComponent, ...canActivate(()=>redirectUnauthorizedTo(['/login'])) },
+  {path: 'consultaPreciosCodigo', component: ConsultaPreciosCodigoComponent, ...canActivate(()=>redirectUnauthorizedTo(['/login'])) },
 ];
 
 @NgModule({

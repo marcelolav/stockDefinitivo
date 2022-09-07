@@ -6,15 +6,16 @@ import { ProductosService } from '@app/servicios/productos.service';
 
 @Component({
   selector: 'app-consulta-precios',
-  templateUrl: './consulta-precios.component.html',
-  styleUrls: ['./consulta-precios.component.css']
+  templateUrl: './consulta-precios-nombre.component.html',
+  styleUrls: ['./consulta-precios-nombre.component.css']
 })
 
 
-export class ConsultaPreciosComponent implements OnInit {
+export class ConsultaPreciosNombreComponent implements OnInit {
 
   filtroProducto: string = '';
   productos: Productos[] = [];
+  ordenado: string = 'nombre' ;  // aca va el nombre del campo por el que deseo ordenar
   
   constructor(private prdServ: ProductosService) {
     
@@ -25,6 +26,10 @@ export class ConsultaPreciosComponent implements OnInit {
     })
   }
 
-
+  ordenarPor(campo: string) {
+    console.log(campo)
+    this.ordenado = campo.trim();
+    console.log('cambio a ->', this.ordenado )
+  }
 
 }

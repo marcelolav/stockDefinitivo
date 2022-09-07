@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, authState  } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, authState, browserSessionPersistence  } from '@angular/fire/auth';
 @Injectable({
   providedIn: 'root',
 })
@@ -11,6 +11,7 @@ export class LoginService {
   }
 
   ingresarUsuarioEmail({email, password}: any) {
+    this.auth.setPersistence(browserSessionPersistence);
     return signInWithEmailAndPassword(this.auth, email, password);
   }
 

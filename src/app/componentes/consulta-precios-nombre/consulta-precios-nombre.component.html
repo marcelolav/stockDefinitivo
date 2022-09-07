@@ -1,0 +1,38 @@
+<div class="row input-group w-75">
+  <h5 class="text-center">Lista de Productos por Nombre</h5>
+  <div class="input-group mb-3 ms-2">
+    <span class="input-group-text" id="basic-addon1"
+      ><i class="bi bi-search"></i
+    ></span>
+    <input
+      type="text"
+      name="searchValue"
+      placeholder="Nombre del producto..."
+      class="form-control text-center"
+      [(ngModel)]="filtroProducto"
+      aria-describedby="basic-addon1"
+      (ngModelChange)="filtroProducto = $event.toUpperCase()"
+    />
+  </div>
+</div>
+<div class="card w-75">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Codigo <button type="button" (click)="ordenarPor('codigo_barra')" class="btn btn-outline-light btn-sm"> <i class="bi bi-arrow-down-short"  ></i></button>
+         </th>
+        <th>Descripción</th>
+        <th class="text-end">Precio Venta</th>
+        <th class="text-end">Stock</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prod of productos | order: 'nombre' | filtroNombreProducto: filtroProducto">
+        <td>{{ prod.codigo_barra }}</td>
+        <td>{{ prod.nombre }}</td>
+        <td class="text-end">{{ prod.precio_vp | currency:'CAD':'symbol-narrow':'1.2-2' }}</td>
+        <td class="text-end">{{ prod.stock | number: '1.2-2'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

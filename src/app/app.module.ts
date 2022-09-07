@@ -31,7 +31,8 @@ import { ConsultaSalidasComponent } from './componentes/consulta-movimientos/sal
 
 import { ConsultaStockComponent } from '@com/consulta-stock/consulta-stock.component';
 
-import { ConsultaPreciosComponent } from '@com/consulta-precios/consulta-precios.component';
+import { ConsultaPreciosNombreComponent } from '@com/consulta-precios-nombre/consulta-precios-nombre.component';
+import { ConsultaPreciosCodigoComponent } from '@com/consulta-precios-codigo/consulta-precios-codigo.component';
 
 // Pipes
 import { KeysPipe } from './pipes/keys.pipe';  // Esta por futuros usos
@@ -42,6 +43,7 @@ import { RubrosService } from '@srv/rubros.service';
 import { LoginService } from '@srv/login.service';
 import { OrderPipe } from './pipes/order.pipe';
 import { FiltroNombreProductoPipe } from './pipes/filtro-nombre-producto.pipe';
+import { FiltroCodigoProductoPipe } from './pipes/filtro-codigo-producto.pipe';
 
 @NgModule({
   declarations: [
@@ -58,9 +60,11 @@ import { FiltroNombreProductoPipe } from './pipes/filtro-nombre-producto.pipe';
     ConsultaIngresosComponent,
     ConsultaSalidasComponent,
     ConsultaStockComponent,
-    ConsultaPreciosComponent,
+    ConsultaPreciosNombreComponent,
+    ConsultaPreciosCodigoComponent,
     OrderPipe,
-    FiltroNombreProductoPipe
+    FiltroNombreProductoPipe,
+    FiltroCodigoProductoPipe
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
