@@ -44,6 +44,7 @@ import { LoginService } from '@srv/login.service';
 import { OrderPipe } from './pipes/order.pipe';
 import { FiltroNombreProductoPipe } from './pipes/filtro-nombre-producto.pipe';
 import { FiltroCodigoProductoPipe } from './pipes/filtro-codigo-producto.pipe';
+import { ConsultaProductosTotalComponent } from './componentes/consulta-productos-total/consulta-productos-total.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { FiltroCodigoProductoPipe } from './pipes/filtro-codigo-producto.pipe';
     ConsultaPreciosCodigoComponent,
     OrderPipe,
     FiltroNombreProductoPipe,
-    FiltroCodigoProductoPipe
+    FiltroCodigoProductoPipe,
+    ConsultaProductosTotalComponent,
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),

@@ -1,0 +1,58 @@
+<div class="row mt-2 p2 d-flex align-items-center">
+  <div class="col-sm-6">
+    <div class="card mt-3 p-4">
+      <div class="card-title">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="codigoProducto"
+            ><i class="bi bi-search"></i
+          ></span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Código del producto"
+            aria-label="codigoProducto"
+            aria-describedby="codigoProducto"
+            [(ngModel)]="filtroProducto"
+            (ngModelChange)="filtroProducto = $event.toUpperCase()"
+          />
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Codigo</th>
+              <th>Descripción</th>
+              <th class="text-end">Precio Venta</th>
+              <th class="text-end">Stock</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="
+                let prod of productos
+                  | order: 'nombre'
+                  | filtroNombreProducto: filtroProducto
+              "
+            >
+              <td (click)="expandirProducto(prod)">{{ prod.codigo_barra }}</td>
+              <td>{{ prod.nombre }}</td>
+              <td class="text-end">
+                {{ prod.precio_vp | currency: "CAD":"symbol-narrow":"1.2-2" }}
+              </td>
+              <td class="text-end">{{ prod.stock | number: "1.2-2" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="mostrarDatos" class="col sm-6">
+    <div class="card">
+        <div class="card-title mt-3 text-center">
+            <h4>{{prdID}} - {{prdNombre}}</h4>
+            
+        </div>
+    </div>
+  </div>
+</div>
