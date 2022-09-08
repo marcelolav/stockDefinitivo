@@ -9,4 +9,5 @@ export interface Productos {
     rubro: string;
     stock: number;
     minimo: number;
+    fotoURL?:string;
 }
