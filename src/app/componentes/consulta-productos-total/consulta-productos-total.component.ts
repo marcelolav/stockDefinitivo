@@ -14,8 +14,15 @@ export class ConsultaProductosTotalComponent implements OnInit {
   productoSeleccionado = [];
   filtroProducto: string = '';
   mostrarDatos: boolean = false;
+
   prdID: string = '';
   prdNombre: string = '';
+  prdPVP: number = 0;
+  prdPVD: number = 0;
+  prdPCP: number = 0;
+  prdPCD: number = 0;
+  prdRubro: string = '';
+  prdImagen: string = ''
 
   ngOnInit(): void {
     this.prdServ.obtenerProductos().subscribe((datos) => {
@@ -27,5 +34,11 @@ export class ConsultaProductosTotalComponent implements OnInit {
     this.mostrarDatos = true;
     this.prdID = datos.id;
     this.prdNombre = datos.nombre;
+    this.prdPVP = datos.precio_vp;
+    this.prdPVD = datos.precio_vd;
+    this.prdPCP = datos.precio_cp;
+    this.prdPCD = datos.precio_cd;
+    this.prdRubro = datos.rubro;
+    this.prdImagen = 'https://static.nationalgeographic.es/files/styles/image_3200/public/75552.ngsversion.1422285553360.jpg?w=1600&h=1067';  
   }
 }

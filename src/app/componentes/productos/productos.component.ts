@@ -31,6 +31,7 @@ export class ProductosComponent implements OnInit {
       rubro: new FormControl(''),
       stock: new FormControl(0),
       minimo: new FormControl(0),
+      fotoURL: new FormControl('')
     });
     this.rubServ.listarRubros().subscribe((datos) => {
       this.listaRubros = datos;
